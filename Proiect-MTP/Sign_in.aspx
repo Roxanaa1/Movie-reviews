@@ -76,6 +76,40 @@
             height: 66px;
         }
     </style>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var nameId = '<%= TextBoxName.ClientID %>';
+            var emailId = '<%= TextBoxEmail.ClientID %>';
+            var passwordId = '<%= TextBoxPassword.ClientID %>';
+
+            window.validateForm = function () {
+                var isValid = true;
+                var name = document.getElementById(nameId);
+                var email = document.getElementById(emailId);
+                var password = document.getElementById(passwordId);
+
+                document.getElementById('NameError').style.display = 'none';
+                document.getElementById('EmailError').style.display = 'none';
+                document.getElementById('PasswordError').style.display = 'none';
+
+                if (name.value.trim() === '') {
+                    document.getElementById('NameError').style.display = 'block';
+                    isValid = false;
+                }
+                if (email.value.trim() === '') {
+                    document.getElementById('EmailError').style.display = 'block';
+                    isValid = false;
+                }
+                if (password.value.trim() === '') {
+                    document.getElementById('PasswordError').style.display = 'block';
+                    isValid = false;
+                }
+
+                return isValid;
+            };
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -121,7 +155,7 @@
                 </td>
                 <td class="auto-style10">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:Label ID="Label1" runat="server" Text="First and last name" CssClass="text-mare" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text="Username" CssClass="text-mare" ForeColor="Black"></asp:Label>
                 </td>
                 <td class="auto-style11">
                    <asp:TextBox ID="TextBoxName" runat="server" Height="48px" Width="270px"></asp:TextBox>
@@ -137,7 +171,7 @@
                 <td class="auto-style12"></td>
             </tr>
             <tr>
-                <td class="auto-style6"></td>
+                <td class="auto-style6">&nbsp;</td>
                 <td class="auto-style5">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Label ID="LabelEmail" runat="server" Text="Your email address" CssClass="text-mare" ForeColor="Black"></asp:Label>
@@ -156,7 +190,7 @@
                 <td class="auto-style7"></td>
             </tr>
             <tr>
-                <td class="auto-style6"></td>
+                <td class="auto-style6">&nbsp;</td>
                 <td class="auto-style5">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Label ID="LabelPassword" runat="server" Text="Create a password" CssClass="text-mare" ForeColor="Black"></asp:Label>
@@ -174,10 +208,12 @@
                 <td class="auto-style7"></td>
             </tr>
             <tr>
-                <td class="auto-style6"></td>
+                <td class="auto-style6">
+                    <asp:Label ID="lblMsg1" runat="server" ForeColor="Black"></asp:Label>
+                </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style25">
-                    <asp:Label ID="Label3" runat="server" Text="Passwords must be at least 8 characters" CssClass="text-mare" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="lblMsg2" runat="server" ForeColor="Black"></asp:Label>
                 </td>
                 <td class="auto-style2"></td>
                 <td class="auto-style2"></td>
@@ -205,7 +241,7 @@
                 <td class="auto-style5"></td>
                 <td class="auto-style26">
                     <!-- Am mărit lățimea butonului -->
-                   <asp:Button ID="ButtonCreate" runat="server" CssClass="button-style" Text="Create your account" Width="366px" OnClientClick="return validateForm();" Height="98px" BackColor="#CCCCCC" ForeColor="Black" />
+                   <asp:Button ID="ButtonCreate" runat="server" CssClass="button-style" Text="Create your account" Width="366px" OnClientClick="return validateForm();" Height="98px" BackColor="#CCCCCC" ForeColor="Black" OnClick="ButtonCreate_Click1" />
 
                     </td>
                 <td class="auto-style14"></td>
@@ -219,35 +255,9 @@
         </table>
     </form>
     
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        function validateForm() {
-            var isValid = true;
-            var name = document.getElementById('TextBoxName');
-            var email = document.getElementById('TextBoxEmail');
-            var password = document.getElementById('TextBoxPassword');
-
-            // Ascundem toate mesajele de eroare
-            document.getElementById('NameError').style.display = 'none';
-            document.getElementById('EmailError').style.display = 'none';
-            document.getElementById('PasswordError').style.display = 'none';
-
-            if (name.value.trim() === '') {
-                document.getElementById('NameError').style.display = 'block';
-                isValid = false;
-            }
-            if (email.value.trim() === '') {
-                document.getElementById('EmailError').style.display = 'block';
-                isValid = false;
-            }
-            if (password.value.trim() === '') {
-                document.getElementById('PasswordError').style.display = 'block';
-                isValid = false;
-            }
-
-            return isValid;
-        }
-    </script>
+   
+    
 
 </body>
 </html>
+

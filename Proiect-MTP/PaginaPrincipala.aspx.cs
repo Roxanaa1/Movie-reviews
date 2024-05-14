@@ -11,17 +11,17 @@ namespace Proiect_MTP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
 
         }
         protected void ButtonMyProfile_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MyProfile.aspx");
+            RedirectToPageIfLoggedIn("MyProfile.aspx");
         }
 
         protected void ButtonHelp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Help.aspx");
+            RedirectToPageIfLoggedIn("Help.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -31,17 +31,29 @@ namespace Proiect_MTP
 
         protected void ButtonSearchMovies_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Search.aspx");
+            RedirectToPageIfLoggedIn("Search.aspx");
         }
 
         protected void ButtonTop_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TopMovies.aspx");
+            RedirectToPageIfLoggedIn("TopMovies.aspx");
         }
 
         protected void Button6_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Settings.aspx");
+            RedirectToPageIfLoggedIn("Settings.aspx");
+        }
+        private void RedirectToPageIfLoggedIn(string page)
+        {
+            if (Session["User"] == null)
+            {
+                Session["RedirectAfterLogin"] = page;
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                Response.Redirect(page);
+            }
         }
     }
 }

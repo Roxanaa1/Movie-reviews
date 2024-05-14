@@ -35,38 +35,42 @@ namespace Proiect_MTP
             }
         }
 
-        protected async void ButtonCreate_Click(object sender, EventArgs e)
+        protected async void ButtonCreate_Click1(object sender, EventArgs e)
         {
-
-            string username = TextBoxName.Text; 
+            string username = TextBoxName.Text;
             string email = TextBoxEmail.Text;
-            string password = TextBoxPassword.Text; 
+            string password = TextBoxPassword.Text;
 
-            // Verificam daca utilizatorul exista
-            FirebaseResponse response = await client.GetTaskAsync($"DateUsers/{username}");
+            if (password.Length < 8)
+            {
+                lblMsg2.Text = "Password must be at least 8 characters long.";
+                lblMsg2.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // Verificăm dacă utilizatorul există
+            FirebaseResponse response = await client.GetAsync($"DateUsers/{username}");
             if (response.Body != "null")
             {
-                // Utilizatorul exista
-                lblMsg.Text = "Utilizatorul există deja. Încearcă să te loghezi.";
-                Response.Redirect("Login.aspx"); 
+                // Utilizatorul există
+                lblMsg1.Text = "Utilizatorul există deja. Încearcă să te loghezi.";
+                Response.Redirect("Login.aspx");
             }
             else
             {
-                // Utilizatorul nu exista, adauga-l în baza de date
+                // Utilizatorul nu există, adaugă-l în baza de date
                 var user = new { Username = username, Email = email, Password = password, DateCreated = DateTime.Now };
-                SetResponse setResponse = await client.SetTaskAsync($"DateUsers/{username}", user);
-                if (setResponse != null) // Verificare simplificata pentru exemplificare
+                SetResponse setResponse = await client.SetAsync($"DateUsers/{username}", user);
+                if (setResponse != null) // Verificare simplificată pentru exemplificare
                 {
-                    lblMsg.Text = "Contul a fost creat cu succes!";
-                    Response.Redirect("PaginaPrincipala.aspx"); 
+                    lblMsg1.Text = "Contul a fost creat cu succes!";
+                    Response.Redirect("PaginaPrincipala.aspx");
                 }
                 else
                 {
-                    lblMsg.Text = "A apărut o eroare la crearea contului.";
+                    lblMsg1.Text = "A apărut o eroare la crearea contului.";
                 }
             }
-       
-
         }
     }
 }

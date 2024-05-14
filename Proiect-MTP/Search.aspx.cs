@@ -7,9 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace Proiect_MTP
 {
-    public partial class Cautare : System.Web.UI.Page
+    public partial class Search : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
         {
 
         }
