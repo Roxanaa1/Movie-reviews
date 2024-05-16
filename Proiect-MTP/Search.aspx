@@ -24,7 +24,7 @@
             <h2 class="text-center mb-4">Caută un Film</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Introdu numele filmului"></asp:TextBox>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Introdu numele filmului" AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                 </div>
                 <div class="col-md-2">
                     <asp:Button ID="btnSearch" runat="server" Text="Caută" CssClass="btn btn-primary btn-block" OnClick="btnSearch_Click" />
@@ -37,7 +37,9 @@
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src='<%# Eval("ImageUrl") %>' class="card-img" alt="Film Image">
+                                    <a href="DetaliiFilm.aspx?id=<%# Eval("Id") %>">
+                                        <img src='<%# Eval("ImageUrl") %>' class="card-img" alt="Film Image">
+                                    </a>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

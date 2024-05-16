@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Reel recenzii</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -192,7 +192,7 @@
     <form id="form1" runat="server">
         <!-- Antetul paginii -->
         <header>
-            <img src="Imagini/Logo1.jpg" alt="Logo" class="logo">
+            <img src="Imagini/Logo1.jpg" alt="Logo" class="logo"/>
         </header>
         
         <!-- Meniul de navigare -->
@@ -226,7 +226,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="auto-style24"></td>
+                        <td class="auto-style24">&nbsp;</td>
                         <td class="auto-style25"></td>
                         <td class="auto-style26"></td>
                         <td class="auto-style27"></td>
@@ -250,17 +250,17 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=1')">
-                                        <img src="Imagini/Avengers.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 1">
+                                        <img src="Imagini/Avengers.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 1"/>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=2')">
-                                        <img src="Imagini/Endgame.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 2">
+                                        <img src="Imagini/Endgame.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 2"/>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=3')">
-                                        <img src="Imagini/GranTurismo.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 3">
+                                        <img src="Imagini/GranTurismo.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 3"/>
                                     </a>
                                 </div>
                             </div>
@@ -290,17 +290,17 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=7')">
-                                        <img src="Imagini/MultiverseOfMadness.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 7">
+                                        <img src="Imagini/MultiverseOfMadness.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 7"/>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=8')">
-                                        <img src="Imagini/Spider-Man_Homecoming.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 8">
+                                        <img src="Imagini/Spider-Man_Homecoming.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 8"/>
                                     </a>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="javascript:void(0);" onclick="checkLoginAndRedirect('DetaliiFilm.aspx?id=9')">
-                                        <img src="Imagini/IronMan2.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 9">
+                                        <img src="Imagini/IronMan2.jpg" class="d-block w-100 carousel-image" alt="Film de acțiune 9"/>
                                     </a>
                                 </div>
                             </div>

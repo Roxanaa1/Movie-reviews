@@ -31,15 +31,11 @@ namespace Proiect_MTP
                 string newEmail = txtNewEmail.Text;
                 string newPassword = txtNewPassword.Text;
 
-                // Aici ar trebui să adaugi logica pentru actualizarea datelor în baza de date
-                // De exemplu: UpdateUserProfile(biography, gender, email, newEmail, newPassword);
-
-                // Oprește operarea pentru a indica succesul
+                // Opreste operarea pentru a indica succesul
                 Response.Write("<script>alert('Profil actualizat cu succes!');</script>");
             }
             catch (Exception ex)
             {
-                // Afișează un mesaj în caz de eroare
                 Response.Write("<script>alert('Eroare la actualizarea profilului: " + ex.Message + "');</script>");
             }
 
@@ -49,15 +45,12 @@ namespace Proiect_MTP
         {
             try
             {
-                // Aici ar trebui să adaugi logica pentru ștergerea contului din baza de date
-                // De exemplu: DeleteUserAccount(email);
-
-                // Redirecționează utilizatorul la o pagină de confirmare sau de logare după ștergerea contului
+               
                 Response.Redirect("Login.aspx");
             }
             catch (Exception ex)
             {
-                // Afișează un mesaj în caz de eroare
+              
                 Response.Write("<script>alert('Eroare la ștergerea contului: " + ex.Message + "');</script>");
             }
 
