@@ -175,6 +175,7 @@
     <Content Include="PaginaPrincipala.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilmList.cs" />
     <Compile Include="Recenzie.cs" />
     <Compile Include="CreateUser.cs" />
     <Compile Include="DetaliiFilm.aspx.cs">

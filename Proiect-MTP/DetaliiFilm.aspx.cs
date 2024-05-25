@@ -25,7 +25,7 @@ namespace Proiect_MTP
 
         protected async void Page_Load(object sender, EventArgs e)
         {
-            
+
             client = new FireSharp.FirebaseClient(config);
             if (client == null)
             {
@@ -37,7 +37,7 @@ namespace Proiect_MTP
             {
                 string filmId = Request.QueryString["id"];
                 // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + filmId + "')", true);
-                
+
                 if (!string.IsNullOrEmpty(filmId))
                 {
                     var film = await GetFilmDetailsAsync(filmId);
@@ -56,7 +56,7 @@ namespace Proiect_MTP
                 {
                     lblStatus.Text = "No film selected.";
                 }
-                
+
             }
 
         }
@@ -122,23 +122,36 @@ namespace Proiect_MTP
             }
         }
 
+        private async Task LoadReviews(string filmId)
+        {
+            FirebaseResponse response = await client.GetAsync("Recenzii/");
+            Dictionary<string, Recenzie> recenzii = response.ResultAs<Dictionary<string, Recenzie>>();
+
+            if (recenzii != null)
+            {
+                var filmRecenzii = recenzii.Values.Where(r => r.FilmId == filmId).ToList();
+                rptRecenzii.DataSource = filmRecenzii;
+                rptRecenzii.DataBind();
+            }
+        }
+
         protected async void AddReview_Click(object sender, EventArgs e)
         {
             txtRecenzie.Visible = true;
             btnSubmitReview.Visible = true;
-            btnSubmitReview.Visible = true;
             lblStatus.Text = "";
         }
+
         protected void ddlStars_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlStars.Style["display"] = "block";
         }
+
         protected async void SubmitReview_Click(object sender, EventArgs e)
         {
             string filmId = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(filmId))
             {
-                
                 if (ddlStars.SelectedIndex == -1)
                 {
                     lblStatus.Text = "Te rog să selectezi un număr de stele.";
@@ -155,7 +168,8 @@ namespace Proiect_MTP
                 {
                     FilmId = filmId,
                     Text = txtRecenzie.Text,
-                    Data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                    Data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Stars = ddlStars.SelectedValue
                 };
 
                 FirebaseResponse response = await client.PushAsync("Recenzii/", recenzie);
@@ -163,6 +177,9 @@ namespace Proiect_MTP
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     lblStatus.Text = "Recenzia a fost adăugată cu succes.";
+                    txtRecenzie.Text = "";
+                    ddlStars.SelectedIndex = -1; 
+                    await LoadReviews(filmId);
                 }
                 else
                 {
@@ -174,14 +191,19 @@ namespace Proiect_MTP
                 lblStatus.Text = "ID-ul filmului nu a fost specificat.";
             }
         }
-       
 
         protected async void EditReview_Click(object sender, EventArgs e)
         {
             string filmId = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(filmId))
             {
-                FirebaseResponse response = client.Get("Recenzii/");
+                if (string.IsNullOrWhiteSpace(txtRecenzie.Text))
+                {
+                    lblStatus.Text = "Câmpul de recenzie nu poate fi gol.";
+                    return;
+                }
+
+                FirebaseResponse response = await client.GetAsync("Recenzii/");
                 Dictionary<string, Recenzie> recenzii = response.ResultAs<Dictionary<string, Recenzie>>();
 
                 if (recenzii != null)
@@ -192,11 +214,15 @@ namespace Proiect_MTP
                         {
                             recenzie.Value.Text = txtRecenzie.Text;
                             recenzie.Value.Data = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            recenzie.Value.Stars = ddlStars.SelectedValue;
 
-                            FirebaseResponse updateResponse = client.Update($"Recenzii/{recenzie.Key}", recenzie.Value);
+                            FirebaseResponse updateResponse = await client.UpdateAsync($"Recenzii/{recenzie.Key}", recenzie.Value);
                             if (updateResponse.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 lblStatus.Text = "Recenzia a fost editată cu succes.";
+                                txtRecenzie.Text = "";
+                                ddlStars.SelectedIndex = -1; 
+                                await LoadReviews(filmId);
                             }
                             else
                             {
@@ -216,15 +242,14 @@ namespace Proiect_MTP
             {
                 lblStatus.Text = "ID-ul filmului nu a fost specificat.";
             }
-
         }
 
-        protected void DeleteReview_Click(object sender, EventArgs e)
+        protected async void DeleteReview_Click(object sender, EventArgs e)
         {
             string filmId = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(filmId))
             {
-                FirebaseResponse response = client.Get("Recenzii/");
+                FirebaseResponse response = await client.GetAsync("Recenzii/");
                 Dictionary<string, Recenzie> recenzii = response.ResultAs<Dictionary<string, Recenzie>>();
 
                 if (recenzii != null)
@@ -233,10 +258,13 @@ namespace Proiect_MTP
                     {
                         if (recenzie.Value.FilmId == filmId)
                         {
-                            FirebaseResponse deleteResponse = client.Delete($"Recenzii/{recenzie.Key}");
+                            FirebaseResponse deleteResponse = await client.DeleteAsync($"Recenzii/{recenzie.Key}");
                             if (deleteResponse.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 lblStatus.Text = "Recenzia a fost ștearsă cu succes.";
+                                txtRecenzie.Text = " ";
+                                ddlStars.SelectedIndex = -1; 
+                                await LoadReviews(filmId);
                             }
                             else
                             {
@@ -257,12 +285,11 @@ namespace Proiect_MTP
                 lblStatus.Text = "ID-ul filmului nu a fost specificat.";
             }
         }
-    
-        protected  void AddFavorite_Click(object sender, EventArgs e)
+
+        protected void AddFavorite_Click(object sender, EventArgs e)
         {
-
+            // Funcționalitate de adăugare la favorite
         }
-
-        
     }
+
 }

@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Async="true" CodeBehind="PaginaPrincipala.aspx.cs" Inherits="Proiect_MTP.WebForm1" %>
-<!DOCTYPE html>
+﻿<%@ Page Language="C#"  AutoEventWireup="true" Async="true" CodeBehind="PaginaPrincipala.aspx.cs" Inherits="Proiect_MTP.WebForm1" %>
+<!DOCTYPE html><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Reel recenzii</title>
@@ -91,6 +91,7 @@
         body {
             background: url(Imagini/Fun1.jpg) no-repeat center center fixed;
             background-size: cover;
+            overflow-x: hidden; /* Previne derularea orizontală */
         }
 
         .auto-style23 {

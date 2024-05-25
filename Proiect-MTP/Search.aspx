@@ -24,12 +24,13 @@
             <h2 class="text-center mb-4">Caută un Film</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Introdu numele filmului" AutoPostBack="true" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Introdu numele filmului"></asp:TextBox>
                 </div>
                 <div class="col-md-2">
                     <asp:Button ID="btnSearch" runat="server" Text="Caută" CssClass="btn btn-primary btn-block" OnClick="btnSearch_Click" />
                 </div>
             </div>
+            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger mt-3"></asp:Label>
             <hr />
             <div id="searchResults" class="mt-4">
                 <asp:Repeater ID="rptResults" runat="server">

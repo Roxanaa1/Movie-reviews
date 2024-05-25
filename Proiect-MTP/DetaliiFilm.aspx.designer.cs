@@ -96,15 +96,6 @@ namespace Proiect_MTP
         protected global::System.Web.UI.WebControls.TextBox txtRecenzie;
 
         /// <summary>
-        /// ddlStars control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlStars;
-
-        /// <summary>
         /// btnSubmitReview control.
         /// </summary>
         /// <remarks>
@@ -114,6 +105,15 @@ namespace Proiect_MTP
         protected global::System.Web.UI.WebControls.Button btnSubmitReview;
 
         /// <summary>
+        /// ddlStars control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlStars;
+
+        /// <summary>
         /// lblStatus control.
         /// </summary>
         /// <remarks>
@@ -121,5 +121,14 @@ namespace Proiect_MTP
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatus;
+
+        /// <summary>
+        /// rptRecenzii control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptRecenzii;
     }
 }

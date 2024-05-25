@@ -30,28 +30,45 @@ namespace Proiect_MTP
 
         protected async void btnSearch_Click(object sender, EventArgs e)
         {
-            await SearchFilmsAsync(txtSearch.Text);
-        }
-        protected async void txtSearch_TextChanged(object sender, EventArgs e)
-        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                lblMessage.Text = "Introduceți numele filmului.";
+                return;
+            }
+
             await SearchFilmsAsync(txtSearch.Text);
         }
 
         private async Task SearchFilmsAsync(string searchText)
         {
-            if (string.IsNullOrEmpty(searchText)) return;
-
             FirebaseResponse response = await client.GetAsync("Films");
-            Dictionary<string, Film> films = response.ResultAs<Dictionary<string, Film>>();
+            var films = response.ResultAs<List<Film>>();
 
             if (films != null)
             {
-                var results = films.Values
-                    .Where(f => f.Title.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                // Verifică dacă există elemente null în lista de filme și elimină-le
+                films = films.Where(f => f != null).ToList();
+
+                var results = films
+                    .Where(f => f.Title != null && f.Title.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
                     .ToList();
 
-                rptResults.DataSource = results;
-                rptResults.DataBind();
+                if (results.Any())
+                {
+                    rptResults.DataSource = results;
+                    rptResults.DataBind();
+                    lblMessage.Text = string.Empty;
+                }
+                else
+                {
+                    lblMessage.Text = "Nu s-au găsit filme cu acest nume.";
+                    rptResults.DataSource = null;
+                    rptResults.DataBind();
+                }
+            }
+            else
+            {
+                lblMessage.Text = "Nu s-au găsit filme.";
             }
         }
     }

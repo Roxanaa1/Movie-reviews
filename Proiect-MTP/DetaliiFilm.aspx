@@ -72,6 +72,9 @@
             color: #FFD700;
             margin-left: 367px;
         }
+        .auto-style2 {
+            margin-left: 39px;
+        }
     </style>
 </head>
 <body>
@@ -90,18 +93,26 @@
                     </div>
                     <div class="review-section">
                         <asp:TextBox ID="txtRecenzie" runat="server" TextMode="MultiLine" Rows="4" Columns="50" Placeholder="Scrie recenzia aici..." Visible="false"></asp:TextBox>
-                        <asp:DropDownList ID="ddlStars" runat="server" Visible="true" Height="68px" Width="118px">
-                            <asp:ListItem Text="1 Stea" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="2 Stele" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="3 Stele" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="4 Stele" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="5 Stele" Value="5"></asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:Button ID="btnSubmitReview" runat="server" Text="Adaugă Recenzie" OnClick="SubmitReview_Click" Visible="false" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnSubmitReview" runat="server" Text="Adaugă Recenzie" OnClick="SubmitReview_Click" Visible="false" CssClass="auto-style2" />
                     </div>
                 </div>
             </div>
+            <asp:DropDownList ID="ddlStars" runat="server" Visible="true" Height="45px" Width="114px">
+                <asp:ListItem Text="1 Stea" Value="1"></asp:ListItem>
+                <asp:ListItem Text="2 Stele" Value="2"></asp:ListItem>
+                <asp:ListItem Text="3 Stele" Value="3"></asp:ListItem>
+                <asp:ListItem Text="4 Stele" Value="4"></asp:ListItem>
+                <asp:ListItem Text="5 Stele" Value="5"></asp:ListItem>
+            </asp:DropDownList>
             <asp:Label ID="lblStatus" runat="server" CssClass="auto-style1"></asp:Label>
+            <asp:Repeater ID="rptRecenzii" runat="server">
+                <ItemTemplate>
+                    <div>
+                        <strong>Recenzie:</strong> <%# Eval("Text") %> - <%# Eval("Data") %> (<%# Eval("Stars") %> Stele)
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </form>
 </body>
