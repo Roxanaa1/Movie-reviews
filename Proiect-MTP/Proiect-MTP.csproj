@@ -162,10 +162,12 @@
     <Content Include="Imagini\The-notebook.jpg" />
     <Content Include="Imagini\ThePianist.jpg" />
     <Content Include="Login.aspx" />
+    <Content Include="Login.html" />
     <Content Include="MyProfile.aspx" />
     <Content Include="Imagini\Hobbit.jpg" />
     <Content Include="Imagini\Interstelar.jpg" />
     <Content Include="Imagini\Joker.jpg" />
+    <Content Include="PaginaPrincipala.html" />
     <Content Include="Search.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="Sign_in.aspx" />
@@ -175,6 +177,7 @@
     <Content Include="PaginaPrincipala.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Favorite.cs" />
     <Compile Include="FilmList.cs" />
     <Compile Include="Recenzie.cs" />
     <Compile Include="CreateUser.cs" />

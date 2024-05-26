@@ -11,7 +11,10 @@ namespace Proiect_MTP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                SetWelcomeMessage();
+            }
 
         }
         protected void ButtonMyProfile_Click(object sender, EventArgs e)
@@ -53,6 +56,17 @@ namespace Proiect_MTP
             else
             {
                 Response.Redirect(page);
+            }
+        }
+        private void SetWelcomeMessage()
+        {
+            if (Session["User"] == null)
+            {
+                LabelMessage.Text = "Nu sunteți conectat. Vă rugăm să vă conectați.";
+            }
+            else
+            {
+                LabelMessage.Text = $"Bine ai venit, {Session["User"].ToString()}!";
             }
         }
     }

@@ -124,6 +124,17 @@
         .auto-style40 {
             height: 5px;
         }
+        .favorite-item img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        .favorite-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
     </style>
     <script type="text/javascript">
         window.onload = function () {
@@ -149,8 +160,8 @@
          <header>
              <img src="Imagini/Logo1.jpg" alt="Logo" class="logo">
              <div style="text-align:center;">
-    <h1 style="font-size: 36px;">My profile</h1>
-</div>
+                 <h1 style="font-size: 36px;">My profile</h1>
+             </div>
          </header>
 
         <table class="auto-style1">
@@ -199,8 +210,8 @@
                             <td class="auto-style23">&nbsp;</td>
                             <td class="auto-style23"></td>
                             <td class="auto-style23"></td>
-                            <td class="auto-style23"></td
-                        ></tr>
+                            <td class="auto-style23"></td>
+                        </tr>
                     </table>
                 </td>
                 <td class="auto-style12">&nbsp;</td>
@@ -231,8 +242,6 @@
                 </td>
                 <td>
                     <textarea id="profileDescription" name="profileDescription" rows="1" cols="20" class="auto-style3" readonly></textarea><br />
-                    <asp:Label ID="Label2" runat="server" Text="Watched movies/series"></asp:Label>
-                     <br />
                     <table class="auto-style16">
                         <tr>
                             <td>&nbsp;</td>
@@ -271,6 +280,17 @@
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Favorite movies/series"></asp:Label>
                     <br />
+                    <asp:Repeater ID="rptFavorites" runat="server">
+                        <ItemTemplate>
+                            <div class="favorite-item">
+                                <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' />
+                                <div>
+                                    <h5><%# Eval("Title") %></h5>
+                                    <p><%# Eval("Description") %></p>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                     <table class="auto-style27">
                         <tr>
                             <td class="auto-style40">
@@ -280,7 +300,6 @@
                         </tr>
                         <tr>
                             <td class="auto-style26">
-                                <asp:Label ID="Label4" runat="server" Text="My list"></asp:Label>
                                 <br />
                                 <br />
                                 <table class="auto-style16">

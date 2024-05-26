@@ -1,7 +1,11 @@
-﻿using System;
+﻿using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,8 +14,25 @@ namespace Proiect_MTP
 {
     public partial class MyProfile : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        IFirebaseConfig config = new FirebaseConfig
         {
+            AuthSecret = "3nAboqNXyMJgmHsDbvd9HyLyFxXhwHn2iqa6ANag",
+            BasePath = "https://movies-cb8be-default-rtdb.firebaseio.com/"
+        };
+        IFirebaseClient client;
+        protected async void Page_Load(object sender, EventArgs e)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            if (client == null)
+            {
+                Response.Write("Nu s-a putut conecta la baza de date.");
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                await LoadFavorites();
+            }
 
         }
 
@@ -106,5 +127,45 @@ namespace Proiect_MTP
                 Session["ImagePath"] = "~/Imagini/" + filename; // Salvăm calea în sesiune
             }
         }
+        private async Task LoadFavorites()
+        {
+            var user = Session["User"]?.ToString();
+            if (user == null)
+            {
+                Response.Write("Trebuie să fiți conectat pentru a vedea filmele favorite.");
+                return;
+            }
+
+            FirebaseResponse response = await client.GetAsync($"Favorites/{user}");
+            var favorites = response.ResultAs<Dictionary<string, Favorite>>();
+
+            if (favorites != null)
+            {
+                var favoriteFilms = new List<Film>();
+                var filmIds = new HashSet<string>();
+
+                foreach (var favorite in favorites.Values)
+                {
+                    if (!filmIds.Contains(favorite.FilmId))
+                    {
+                        filmIds.Add(favorite.FilmId);
+                        var filmResponse = await client.GetAsync($"Films/{favorite.FilmId}");
+                        var film = filmResponse.ResultAs<Film>();
+                        if (film != null)
+                        {
+                            favoriteFilms.Add(film);
+                        }
+                    }
+                }
+
+                rptFavorites.DataSource = favoriteFilms;
+                rptFavorites.DataBind();
+            }
+            else
+            {
+                Response.Write("Nu aveți filme favorite.");
+            }
+        }
+
     }
 }

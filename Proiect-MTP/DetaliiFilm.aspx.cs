@@ -262,7 +262,7 @@ namespace Proiect_MTP
                             if (deleteResponse.StatusCode == System.Net.HttpStatusCode.OK)
                             {
                                 lblStatus.Text = "Recenzia a fost ștearsă cu succes.";
-                                txtRecenzie.Text = " ";
+                                txtRecenzie.Text = "";
                                 ddlStars.SelectedIndex = -1; 
                                 await LoadReviews(filmId);
                             }
@@ -286,10 +286,50 @@ namespace Proiect_MTP
             }
         }
 
-        protected void AddFavorite_Click(object sender, EventArgs e)
+        protected async void AddFavorite_Click(object sender, EventArgs e)
         {
-            // Funcționalitate de adăugare la favorite
+            string filmId = Request.QueryString["id"];
+            if (!string.IsNullOrEmpty(filmId))
+            {
+                var username = Session["User"]?.ToString();
+                if (username == null)
+                {
+                    lblStatus.Text = "Trebuie să fiți conectat pentru a adăuga filme la favorite.";
+                    return;
+                }
+
+                var response = await client.GetAsync($"Favorites/{username}/{filmId}");
+                if (response.Body != "null")
+                {
+                    lblStatus.Text = "Filmul este deja în filmele favorite.";
+                    return;
+                }
+
+                var film = await GetFilmDetailsAsync(filmId);
+                if (film != null)
+                {
+                    var favorite = new Favorite { FilmId = filmId, UserId = username };
+                    SetResponse setResponse = await client.SetAsync($"Favorites/{username}/{filmId}", favorite);
+                    if (setResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        lblStatus.Text = "Filmul a fost adăugat la favorite.";
+                    }
+                    else
+                    {
+                        lblStatus.Text = "A apărut o problemă la adăugarea filmului la favorite.";
+                    }
+                }
+                else
+                {
+                    lblStatus.Text = "Filmul nu a fost găsit.";
+                }
+            }
+            else
+            {
+                lblStatus.Text = "ID-ul filmului nu a fost specificat.";
+            }
         }
+
     }
 
 }

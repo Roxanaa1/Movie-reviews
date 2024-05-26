@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Proiect_MTP.Site1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.Master.cs" Inherits="Proiect_MTP.Site1" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,26 +8,171 @@
     <title><asp:ContentPlaceHolder ID="head" runat="server" /></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <style>
+        /* Stiluri CSS existente */
+        .auto-style5 {
+            width: 82px;
+        }
+        .auto-style8 {
+            left: 0px;
+            top: 0px;
+            width: 1557px;
+        }
+        .auto-style9 {
+            width: 111%;
+        }
+        .button-style {
+            background-color: #6495ED; /* albastru */
+            color: white; /* Culoare text alb */
+            border: none; /* fara bordura vizibila */
+            padding: 10px 15px; /* Padding pentru dimensiuni */
+            border-radius: 5px; /* Colturi rotunjite */
+            cursor: pointer; /* Schimba cursorul cand este deasupra butonului */
+        }
+        .auto-style12 {
+            border-style: none;
+            border-color: none;
+            border-width: medium;
+            background-color: #6495ED; /* albastru */
+            color: white; /* Culoare text alb */
+            padding: 10px 15px;
+            border-radius: 5px; /* Colturi rotunjite */
+            cursor: pointer;
+            margin-left: 0;
+        }
+        .auto-style13 {
+            width: 179px;
+        }
+        .auto-style16 {
+            width: 374px;
+        }
+        .auto-style18 {
+            width: 194px;
+        }
+        .auto-style19 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: #6495ED; /* albastru */
+            color: white; /* Culoare text alb */
+            padding: 10px 15px; /* Padding pentru dimensiuni */
+            border-radius: 5px; /* Colturi rotunjite */
+            cursor: pointer;
+            margin-left: 38px;
+        }
+        .auto-style20 {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background-color: #6495ED; /* albastru */
+            color: white; /* Culoare text alb */
+            padding: 10px 15px;
+            border-radius: 5px; /* Colturi rotunjite */
+            cursor: pointer;
+            margin-left: 211px;
+            margin-bottom: 0px;
+        }
+        .auto-style21 {
+            border-style: none;
+            border-width: medium;
+            background-color: #6495ED; /* albastru */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px; /* Colturi rotunjite */
+            cursor: pointer;
+            margin-left: 0px;
+        }
+        .auto-style22 {
+            width: 217px;
+        }
+
         body {
             background: url(Imagini/Fun1.jpg) no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden; /* Previne derularea orizontală */
         }
+
+        .auto-style23 {
+            width: 99%;
+            height: 87px;
+        }
+       
+/* Stil pentru logo */
         .logo {
             position: absolute;
             top: 10px;
-            left: 15px;
-            width: 130px;
-            height: auto;
+            left: 15px; /* modifica pozitia logo-ului la stanga sus */
+            width: 130px; /* ajusteaza dimensiunile logo-ului dupa nevoie */
+            height: auto; /* asigura mentinerea proporțiilor */
         }
-        nav {
-            margin-top: 20px;
+        .row {
+            margin-right: 0; /* Override Bootstrap's default right margin */
+            margin-left: 0; /* Override Bootstrap's default left margin */
         }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 50px;
+
+        .col-md-4 {
+            padding: 0 15px; /* Add padding to column for spacing between images */
+        }
+
+        .carousel-item {
+            transition: transform 2s ease, opacity .5s ease-in-out; /* Tranzitie lina pentru efectul de alunecare */
+        }
+        .carousel-image {
+            height: 500px; /* Înălțimea mărită pentru efectul de dreptunghi în picioare */
+            width: 300px; /* Lățimea fixă */
+            object-fit: cover;
+        }
+
+        .carousel-item {
+            transition: transform 2s ease, opacity .5s ease-in-out; /* Tranzitie lina pentru efectul de alunecare */
+        }
+
+        .carousel-inner .row {
+            margin: 0; /* Elimină marginile implicite pentru rând */
+        }
+
+        .carousel-inner .col-md-4 {
+            padding: 5px; /* Spațiu mic între imagini */
+        }
+
+        .carousel {
+            margin-bottom: 50px; /* Spațiu între carousele diferite */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Fundal mai vizibil pentru săgeți */
+        }
+
+        header, .logo, .navbar, .button-style, .auto-style5, .auto-style8, .auto-style9, .auto-style12, .auto-style13, .auto-style16, .auto-style18, .auto-style19, .auto-style20, .auto-style21, .auto-style22, .auto-style23 {
+            /* stiluri existente sau gol dacă sunt specifice */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Fundal mai vizibil pentru săgeți */
+        }
+        .carousel-caption {
+            background-color: rgba(0,0,0,0.5); /* Fundal pentru text pentru vizibilitate îmbunătățită */
+            border-radius: 5px;
+        }
+        .auto-style24 {
+            width: 374px;
+            height: 10px;
+        }
+        .auto-style25 {
+            width: 179px;
+            height: 10px;
+        }
+        .auto-style26 {
+            width: 194px;
+            height: 10px;
+        }
+        .auto-style27 {
+            width: 82px;
+            height: 10px;
+        }
+        .auto-style28 {
+            height: 10px;
         }
     </style>
 </head>
@@ -39,33 +184,48 @@
         </header>
 
         <!-- Meniul de navigare -->
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonMyProfile" runat="server" CssClass="nav-link" Text="My profile" OnClick="ButtonMyProfile_Click" />
-                    </li>
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonSearchMovies" runat="server" CssClass="nav-link" Text="Search movie/series" OnClick="ButtonSearchMovies_Click" />
-                    </li>
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonTop" runat="server" CssClass="nav-link" Text="Most popular movies" OnClick="ButtonTop_Click" />
-                    </li>
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonSettings" runat="server" CssClass="nav-link" Text="Settings" OnClick="ButtonSettings_Click" />
-                    </li>
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonLogin" runat="server" CssClass="nav-link" Text="Login/Sign up" OnClick="ButtonLogin_Click" />
-                    </li>
-                    <li class="nav-item">
-                        <asp:Button ID="ButtonHelp" runat="server" CssClass="nav-link" Text="Help" OnClick="ButtonHelp_Click" />
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <nav class="auto-style8">
+    <ul class="navbar-nav">
+        <table class="auto-style9">
+            <tr>
+                <td class="auto-style16">
+                    <table class="auto-style23">
+                        <tr>
+                            <td>
+                                <asp:Button ID="ButtonMyProfile" runat="server" OnClick="ButtonMyProfile_Click" CssClass="auto-style20" Text="My profile" Width="123px" BackColor="#996633" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="auto-style13">
+                    <asp:Button ID="ButtonSearchMovies" runat="server" CssClass="button-style" OnClick="ButtonSearchMovies_Click"  Text="Search movie/series" Width="201px" BackColor="#996633" />
+                </td>
+                <td class="auto-style18">
+                    <asp:Button ID="ButtonTop" runat="server" CssClass="auto-style19" OnClick="ButtonTop_Click" Text="Most popular movies" Width="217px" BackColor="#996633" />
+                </td>
+                <td class="auto-style5">
+                    <asp:Button ID="ButtonSettings" runat="server" CssClass="auto-style12" Height="44px" OnClick="Button6_Click" Text="Settings" Width="183px" BackColor="#996633" ForeColor="White" style="margin-left: 39px" />
+                </td>
+                <td class="auto-style22">
+                    <asp:Button ID="ButtonLogin" runat="server" OnClick="Button1_Click" CssClass="auto-style19" Text="Login/Sign up" Width="138px" BackColor="#996633" Height="44px" />
+                </td>
+                <td>
+                    <asp:Button ID="ButtonHelp" runat="server"  CssClass="auto-style21" OnClick="ButtonHelp_Click" Text="Help" Width="94px" BackColor="#996633" Height="44px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style24">&nbsp;</td>
+                <td class="auto-style25">
+    <asp:Label ID="LabelMessage" runat="server" CssClass="text-white"></asp:Label>
+                </td>
+                <td class="auto-style26"></td>
+                <td class="auto-style27"></td>
+                <td class="auto-style22">&nbsp;</td>
+                <td class="auto-style28"></td>
+            </tr>
+        </table>
+    </ul>
+</nav>
 
         <!-- Continutul paginii -->
         <div class="container">

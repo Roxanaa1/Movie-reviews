@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#"  AutoEventWireup="true" Async="true" CodeBehind="PaginaPrincipala.aspx.cs" Inherits="Proiect_MTP.WebForm1" %>
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Reel recenzii</title>
@@ -228,7 +228,9 @@
                     </tr>
                     <tr>
                         <td class="auto-style24">&nbsp;</td>
-                        <td class="auto-style25"></td>
+                        <td class="auto-style25">
+            <asp:Label ID="LabelMessage" runat="server" CssClass="text-white"></asp:Label>
+                        </td>
                         <td class="auto-style26"></td>
                         <td class="auto-style27"></td>
                         <td class="auto-style22">&nbsp;</td>
