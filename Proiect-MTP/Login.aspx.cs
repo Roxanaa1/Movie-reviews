@@ -6,17 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 
-
 namespace Proiect_MTP
 {
     public partial class Autentificare : System.Web.UI.Page
-    {
-        ///conectarea la Baza de date 
+    { 
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "GYGuqf4TtckWwYi9IYktNRK24TjNw2uEJZwbhUAf",
@@ -24,9 +21,6 @@ namespace Proiect_MTP
         };
 
         IFirebaseClient client;
-
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             client = new FireSharp.FirebaseClient(config);
@@ -35,17 +29,28 @@ namespace Proiect_MTP
                 lblMsg.Text = "Conexiunea a fost realizata cu succes";
             else
                 lblMsg.Text = "Conexiune esuata";
-
         }
         protected void ButtonSignIn_Click(object sender, EventArgs e)
         {
             Response.Redirect("Sign_in.aspx");
         }
-
         protected async void ButtonAutentification_Click1(object sender, EventArgs e)
         {
             var username = TextBoxUsername.Text.Trim();
             var password = TextBoxPassword.Text.Trim();
+            if (string.IsNullOrEmpty(username))
+            {
+                lblMsg.Text = "The Username field is required.";
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                lblMsg.Text = "The Password field is required.";
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
 
             FirebaseResponse response = await client.GetAsync("DateUsers/" + username);
             if (response.Body == "null")

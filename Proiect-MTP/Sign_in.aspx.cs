@@ -12,8 +12,6 @@ namespace Proiect_MTP
 {
     public partial class Sign_in : System.Web.UI.Page
     {
-
-        //conectare la baza de date
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "GYGuqf4TtckWwYi9IYktNRK24TjNw2uEJZwbhUAf",
@@ -34,7 +32,6 @@ namespace Proiect_MTP
                 lblMsg.Text = "Conexiune esuata!";
             }
         }
-
         protected async void ButtonCreate_Click1(object sender, EventArgs e)
         {
             string username = TextBoxName.Text;
@@ -47,21 +44,18 @@ namespace Proiect_MTP
                 lblMsg2.ForeColor = System.Drawing.Color.Red;
                 return;
             }
-
-            // Verificăm dacă utilizatorul există
             FirebaseResponse response = await client.GetAsync($"DateUsers/{username}");
             if (response.Body != "null")
             {
-                // Utilizatorul există
                 lblMsg1.Text = "Utilizatorul există deja. Încearcă să te loghezi.";
                 Response.Redirect("Login.aspx");
             }
             else
             {
-                // Utilizatorul nu există, adaugă-l în baza de date
                 var user = new { Username = username, Email = email, Password = password, DateCreated = DateTime.Now };
                 SetResponse setResponse = await client.SetAsync($"DateUsers/{username}", user);
-                if (setResponse != null) // Verificare simplificată pentru exemplificare
+
+                if (setResponse != null) 
                 {
                     lblMsg1.Text = "Contul a fost creat cu succes!";
                     Response.Redirect("PaginaPrincipala.aspx");
